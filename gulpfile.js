@@ -95,3 +95,8 @@ gulp.task('imagescache', function(){
     })))
   .pipe(gulp.dest('dist/images'))
 });
+
+gulp.task('fonts', function() {
+  return gulp.src('app/fonts/**/*')
+  .pipe(gulp.dest('dist/fonts'))
+})
