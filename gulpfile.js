@@ -9,13 +9,14 @@ var gulp = require('gulp'),
     cssnano = require('gulp-cssnano'),
     imagemin = require('gulp-imagemin'),
     cache = require('gulp-cache'),
-    del = require('del');
+    del = require('del'),
+    runSequence = require('run-sequence');
 
 gulp.task('hello', function() {
   console.log('Xin chào Tuân');
 });
 
-gulp.task('watch', ['browserSync', 'sassall'], function (){
+gulp.task('watch', function (){
   gulp.watch('app/scss/**/*.scss', ['sassall']);
   // Reloads the browser whenever HTML or JS files change
   gulp.watch('app/*.html', browserSync.reload);
@@ -108,4 +109,17 @@ gulp.task('clean:dist', function() {
 
 gulp.task('cache:clear', function (callback) {
     return cache.clearAll(callback)
+});
+
+gulp.task('build', function (callback) {
+  runSequence('clean:dist',
+    ['sassall', 'usereffull', 'fonts'],
+    callback
+  )
+});
+
+gulp.task('default', function (callback) {
+  runSequence(['sassall','browserSync'], 'watch',
+    callback
+  )
 });
