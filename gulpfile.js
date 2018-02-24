@@ -8,7 +8,8 @@ var gulp = require('gulp'),
     gulpIf = require('gulp-if'),
     cssnano = require('gulp-cssnano'),
     imagemin = require('gulp-imagemin'),
-    cache = require('gulp-cache');
+    cache = require('gulp-cache'),
+    del = require('del');
 
 gulp.task('hello', function() {
   console.log('Xin chào Tuân');
@@ -99,4 +100,12 @@ gulp.task('imagescache', function(){
 gulp.task('fonts', function() {
   return gulp.src('app/fonts/**/*')
   .pipe(gulp.dest('dist/fonts'))
-})
+});
+
+gulp.task('clean:dist', function() {
+  return del.sync('dist');
+});
+
+gulp.task('cache:clear', function (callback) {
+    return cache.clearAll(callback)
+});
