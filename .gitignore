@@ -2,6 +2,7 @@ target/
 !.mvn/wrapper/
 !.idea/
 node_modules/
+app/bower_components/
 
 ### STS ###
 .apt_generated

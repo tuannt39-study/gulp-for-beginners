@@ -10,7 +10,8 @@ var gulp = require('gulp'),
     imagemin = require('gulp-imagemin'),
     cache = require('gulp-cache'),
     del = require('del'),
-    runSequence = require('run-sequence');
+    runSequence = require('run-sequence'),
+    googleCdn = require('gulp-google-cdn');
 
 gulp.task('hello', function() {
   console.log('Xin chào Tuân');
@@ -123,3 +124,9 @@ gulp.task('default', function (callback) {
     callback
   )
 });
+
+gulp.task('googlecdn', () =>
+	gulp.src('app/index.html')
+		.pipe(googleCdn(require('./bower.json')))
+		.pipe(gulp.dest('dist'))
+);

@@ -14,3 +14,7 @@
 - npm install gulp-cache --save-dev
 - npm install del --save-dev
 - npm install run-sequence --save-dev
+- npm install --save-dev gulp-google-cdn
+- bower init
+- bower install angular
+- bower install bootstrap
