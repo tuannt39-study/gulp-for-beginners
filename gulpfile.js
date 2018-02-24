@@ -6,7 +6,9 @@ var gulp = require('gulp'),
     useref = require('gulp-useref'),
     uglify = require('gulp-uglify'),
     gulpIf = require('gulp-if'),
-    cssnano = require('gulp-cssnano');
+    cssnano = require('gulp-cssnano'),
+    imagemin = require('gulp-imagemin'),
+    cache = require('gulp-cache');
 
 gulp.task('hello', function() {
   console.log('Xin chào Tuân');
@@ -68,4 +70,28 @@ gulp.task('usereffull', function(){
     // Minifies only if it's a CSS file
     .pipe(gulpIf('*.css', cssnano()))
     .pipe(gulp.dest('dist'))
+});
+
+gulp.task('images', function(){
+  return gulp.src('app/images/**/*.+(png|jpg|gif|svg)')
+  .pipe(imagemin())
+  .pipe(gulp.dest('dist/images'))
+});
+
+gulp.task('imagesitl', function(){
+  return gulp.src('app/images/**/*.+(png|jpg|jpeg|gif|svg)')
+  .pipe(imagemin({
+      // Setting interlaced to true
+      interlaced: true
+    }))
+  .pipe(gulp.dest('dist/images'))
+});
+
+gulp.task('imagescache', function(){
+  return gulp.src('app/images/**/*.+(png|jpg|jpeg|gif|svg)')
+  // Caching images that ran through imagemin
+  .pipe(cache(imagemin({
+      interlaced: true
+    })))
+  .pipe(gulp.dest('dist/images'))
 });
