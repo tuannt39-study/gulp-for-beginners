@@ -2,7 +2,11 @@
 
 var gulp = require('gulp'),
     sass = require('gulp-sass'),
-    browserSync = require('browser-sync').create();
+    browserSync = require('browser-sync').create(),
+    useref = require('gulp-useref'),
+    uglify = require('gulp-uglify'),
+    gulpIf = require('gulp-if'),
+    cssnano = require('gulp-cssnano');
 
 gulp.task('hello', function() {
   console.log('Xin chào Tuân');
@@ -41,4 +45,27 @@ gulp.task('browserSync', function() {
       baseDir: 'app'
     },
   })
-})
+});
+
+gulp.task('userefjs', function(){
+  return gulp.src('app/*.html')
+    .pipe(useref())
+    .pipe(gulp.dest('dist'))
+});
+
+gulp.task('userefjsmini', function(){
+  return gulp.src('app/*.html')
+    .pipe(useref())
+    // Minifies only if it's a JavaScript file
+    .pipe(gulpIf('*.js', uglify()))
+    .pipe(gulp.dest('dist'))
+});
+
+gulp.task('usereffull', function(){
+  return gulp.src('app/*.html')
+    .pipe(useref())
+    .pipe(gulpIf('*.js', uglify()))
+    // Minifies only if it's a CSS file
+    .pipe(gulpIf('*.css', cssnano()))
+    .pipe(gulp.dest('dist'))
+});
