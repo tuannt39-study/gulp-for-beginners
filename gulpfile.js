@@ -18,3 +18,8 @@ gulp.task('sassall', function() {
     .pipe(sass())
     .pipe(gulp.dest('app/css'))
 });
+
+gulp.task('watchsass', function(){
+  gulp.watch('app/scss/**/*.scss', ['sassall']);
+  // Other watchers
+});
