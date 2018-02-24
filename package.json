@@ -1,0 +1,25 @@
+{
+  "name": "gulp-for-beginners",
+  "version": "1.0.0",
+  "description": "gulp-for-beginners",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tuannt39-study/gulp-for-beginners.git"
+  },
+  "keywords": [
+    "gulp-for-beginners"
+  ],
+  "author": "tuannt39",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tuannt39-study/gulp-for-beginners/issues"
+  },
+  "homepage": "https://github.com/tuannt39-study/gulp-for-beginners#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
